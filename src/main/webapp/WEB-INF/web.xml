@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         id="WebApp_ID" version="3.1">
+  <display-name>dwrTest</display-name>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+
+  <!-- <listener>
+      <listener-class>org.directwebremoting.servlet.DwrListener</listener-class>
+  </listener> -->
+
+  <servlet>
+    <servlet-name>dwr</servlet-name>
+    <display-name>DWR Servlet</display-name>
+    <description>Direct Web Remoter Servlet</description>
+    <servlet-class>org.directwebremoting.servlet.DwrServlet</servlet-class>
+
+    <!-- <init-param> <param-name>fileUploadMaxBytes</param-name> <param-value>25000</param-value>
+        </init-param> -->
+
+    <!-- This should NEVER be present in live -->
+    <!-- <init-param> <param-name>debug</param-name> <param-value>true</param-value>
+        </init-param> -->
+    <!-- <init-param> <param-name>accessLogLevel</param-name> <param-value>runtimeexception</param-value>
+        </init-param> -->
+    <!-- WARNING: allowing JSON-RPC connections bypasses much of the security
+        protection that DWR gives you. Take this out if security is important -->
+    <!-- <init-param> <param-name>jsonRpcEnabled</param-name> <param-value>true</param-value>
+        </init-param> -->
+
+    <!-- WARNING: allowing JSONP connections bypasses much of the security
+        protection that DWR gives you. Take this out if security is important -->
+    <!-- <init-param> <param-name>jsonpEnabled</param-name> <param-value>true</param-value>
+        </init-param> -->
+
+    <!-- data: URLs are good for small images, but are slower, and could OOM
+        for larger images. Leave this out (or keep 'false') for anything but small
+        images -->
+    <!-- <init-param> <param-name>preferDataUrlSchema</param-name> <param-value>false</param-value>
+        </init-param> -->
+
+    <!-- Remove this unless you want to use active reverse ajax -->
+    <!-- 使用服务器反转AJAX -->
+    <init-param>
+      <param-name>activeReverseAjaxEnabled</param-name>
+      <param-value>true</param-value>
+    </init-param>
+
+    <!-- By default DWR creates application scope objects when they are first
+        used. This creates them when the app-server is started -->
+    <!-- 是能够从其他域请求true：开启； false：关闭 -->
+    <init-param>
+      <param-name>initApplicationScopeCreatorsAtStartup</param-name>
+      <param-value>true</param-value>
+    </init-param>
+
+    <init-param>
+      <param-name>crossDomainSessionSecurity</param-name>
+      <param-value>false</param-value>
+    </init-param>
+
+    <!-- Enables GET requests which are necessary for X-domain calls -->
+    <init-param>
+      <param-name>allowGetForSafariButMakeForgeryEasier</param-name>
+      <param-value>true</param-value>
+    </init-param>
+
+
+    <!-- 允许远程调用js -->
+    <init-param>
+      <param-name>allowScriptTagRemoting</param-name>
+      <param-value>true</param-value>
+    </init-param>
+
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>dwr</servlet-name>
+    <url-pattern>/dwr/*</url-pattern>
+  </servlet-mapping>
+
+
+</web-app>
